@@ -12,10 +12,11 @@ import {
   Bar,
   LabelList,
 } from "recharts";
-import { FiHome, FiActivity, FiAlertCircle } from "react-icons/fi";
+import { FiHome, FiActivity, FiAlertCircle, FiList } from "react-icons/fi";
 import LiveTranscript from "../components/LiveTranscript";
 import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 import StarField from "../components/Starfield";
+import Link from "next/link";
 
 const Dashboard = () => {
   const { user } = useUser();
@@ -90,12 +91,21 @@ const Dashboard = () => {
           <button className="flex items-center gap-3 text-[#a29bfe] pl-1.5 hover:text-white">
             <FiActivity /> Performance
           </button>
-          <button className="flex items-center gap-3 text-[#a29bfe] pl-1.5 hover:text-white">
+          <Link
+            href={"/alerts"}
+            className="flex items-center gap-3 text-[#a29bfe] pl-1.5 hover:text-white"
+          >
             <FiAlertCircle /> Alerts
-          </button>
+          </Link>
+          <Link
+            href={"/calls"}
+            className="flex items-center gap-3 text-[#a29bfe] pl-1.5 hover:text-white"
+          >
+            <FiList /> Call Logs
+          </Link>
         </nav>
-        <div className="absolute bottom-[50px] left-1/2 translate-x-[-50%]">
-          <div>
+        <div className="absolute bottom-[50px] left-1/2 hover:cursor-pointer translate-x-[-50%]">
+          <div className="hover:cursor-pointer">
             <SignOutButton />
           </div>
         </div>

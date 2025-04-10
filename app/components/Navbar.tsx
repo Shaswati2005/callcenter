@@ -55,10 +55,13 @@ const Navbar = () => {
             Home
             <div className="absolute bottom-0 left-0 w-0 h-[3px]  bg-[#ffffff] mt-1  transition-all duration-300 ease-in-out group-hover:w-full "></div>
           </Link>
-          <button className="relative group  hover:scale-110 transition-all  duration-300 hover:cursor-pointer">
+          <Link
+            href={"/dashboard"}
+            className="relative group  hover:scale-110 transition-all  duration-300 hover:cursor-pointer"
+          >
             Dashboard
             <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-[#ffffff] mt-1 transition-all duration-300 ease-in-out group-hover:w-full"></div>
-          </button>
+          </Link>
           <button className="relative group  hover:scale-110 transition-all duration-300 hover:cursor-pointer">
             Agent Reports
             <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-[#ffffff] mt-1 transition-all duration-300 ease-in-out group-hover:w-full"></div>

@@ -10,12 +10,12 @@ import {
   ResponsiveContainer,
   BarChart,
   Bar,
+  LabelList,
 } from "recharts";
 import { FiHome, FiActivity, FiAlertCircle } from "react-icons/fi";
-
 import LiveTranscript from "../components/LiveTranscript";
-import { useState } from "react";
 import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
+import StarField from "../components/Starfield";
 
 const Dashboard = () => {
   const { user } = useUser();
@@ -78,7 +78,7 @@ const Dashboard = () => {
     <div className="flex relative h-screen bg-[#121212] text-white">
       {/* Sidebar */}
       <aside className="w-64 bg-[#1e1e2f] border-r border-[#2e2e3e] p-6 flex flex-col  gap-8 sticky top-0 h-screen">
-        <h2 className="text-2xl font-bold text-[#a29bfe]">📊 Elite Support</h2>
+        <h2 className="text-2xl font-bold text-[#a29bfe]">Elite Support</h2>
         <nav className="flex flex-col gap-4">
           <span className="flex w-full justify-start gap-4 items-center">
             <UserButton />
@@ -94,6 +94,11 @@ const Dashboard = () => {
             <FiAlertCircle /> Alerts
           </button>
         </nav>
+        <div className="absolute bottom-[50px] left-1/2 translate-x-[-50%]">
+          <div>
+            <SignOutButton />
+          </div>
+        </div>
       </aside>
 
       {/* Main Dashboard */}
@@ -140,8 +145,11 @@ const Dashboard = () => {
             className="bg-[#1c1c2b] p-6 rounded-3xl shadow-md border border-[#2a2a40]"
           >
             <h3 className="text-xl font-semibold text-[#a29bfe] mb-4">
-              Agent Performance Alerts
+              Agent Performance
             </h3>
+            <h5 className="text-md font-medium text-[#a29bfe] mb-2">
+              number of calls per day
+            </h5>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={lineData}>
                 <XAxis dataKey="name" stroke="#a29bfe" />
@@ -165,9 +173,12 @@ const Dashboard = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="bg-[#1c1c2b] p-6 rounded-3xl shadow-md border border-[#2a2a40]"
           >
-            <h3 className="text-xl font-semibold text-[#a29bfe] mb-4">
+            <h3 className="text-xl font-semibold text-[#a29bfe] mb-2">
               Service Quality Trend
             </h3>
+            <h5 className="text-md font-medium text-[#a29bfe] mb-2">
+              Lower score means negative sentiment
+            </h5>
             <ResponsiveContainer width="100%" height={300}>
               <LineChart data={satisfactionData}>
                 <XAxis dataKey="name" stroke="#a29bfe" />
@@ -221,10 +232,10 @@ const Dashboard = () => {
             </tbody>
           </table>
         </motion.div>
+        <div className="opacity-30">
+          <StarField />
+        </div>
       </main>
-      <div className="absolute bottom-0">
-        <SignOutButton />
-      </div>
     </div>
   );
 };

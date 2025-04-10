@@ -40,10 +40,10 @@ export default function LiveTranscript() {
       });
       const data = await res.json();
       if (data.success) {
-        alert(`Call started: ${data.callSid}`);
+        toast.success(`Call started: ${data.callSid}`);
         setSid(data.callSid);
       } else {
-        alert(`Call failed: ${data.error}`);
+        toast.error(`Call failed: ${data.error}`);
         setSid("");
       }
     } catch (e) {
@@ -83,7 +83,7 @@ export default function LiveTranscript() {
         <button
           onClick={makeCall}
           type="button"
-          className="w-fit-h-fit px-4 py-2 rounded-xl bg-green-600"
+          className="w-fit-h-fit px-4 py-2 rounded-xl hover:cursor-pointer bg-green-600"
         >
           Make Call
         </button>

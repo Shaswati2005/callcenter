@@ -14,7 +14,7 @@ export async function POST(request: Request) {
       to,
         from: process.env.TWILIO_PHONE_NUMBER!,
         statusCallback: 'http://localhost:3000/api/twilio-status',
-        statusCallbackEvent: ['initiated', 'ringing', 'answered', 'completed'],
+        statusCallbackEvent: ['initiated', 'ringing', 'answered', 'completed','hold'],
         statusCallbackMethod: 'POST',
     });
 

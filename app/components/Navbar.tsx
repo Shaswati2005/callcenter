@@ -50,23 +50,23 @@ const Navbar = () => {
           <Link
             href={"/"}
             title="home "
-            className="relative group  hover:scale-110 transition-all duration-300"
+            className="relative group  hover:scale-110 transition-all duration-300 hover:cursor-pointer"
           >
             Home
             <div className="absolute bottom-0 left-0 w-0 h-[3px]  bg-[#ffffff] mt-1  transition-all duration-300 ease-in-out group-hover:w-full "></div>
           </Link>
-          <button className="relative group  hover:scale-110 transition-all  duration-300">
+          <button className="relative group  hover:scale-110 transition-all  duration-300 hover:cursor-pointer">
             Dashboard
             <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-[#ffffff] mt-1 transition-all duration-300 ease-in-out group-hover:w-full"></div>
           </button>
-          <button className="relative group  hover:scale-110 transition-all duration-300">
+          <button className="relative group  hover:scale-110 transition-all duration-300 hover:cursor-pointer">
             Agent Reports
             <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-[#ffffff] mt-1 transition-all duration-300 ease-in-out group-hover:w-full"></div>
           </button>
           <Link
             href={"/"}
             title="past "
-            className="relative group  hover:scale-110 transition-all duration-300"
+            className="relative group  hover:scale-110 transition-all duration-300 hover:cursor-pointer"
           >
             Call History
             <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-[#ffffff] mt-1 transition-all duration-300 ease-in-out group-hover:w-full"></div>
@@ -74,7 +74,7 @@ const Navbar = () => {
           <Link
             href={"/"}
             title="past "
-            className="relative group  hover:scale-110 transition-all duration-300"
+            className="relative group  hover:scale-110 transition-all duration-300 hover:cursor-pointer"
           >
             Language Insights
             <div className="absolute bottom-0 rounded-xl left-0 w-0 h-[3px] mt-1 bg-[#ffffff] transition-all duration-300 ease-in-out group-hover:w-full"></div>
@@ -82,12 +82,12 @@ const Navbar = () => {
           <Link
             href={"/"}
             title="updates"
-            className="relative group  hover:scale-110 transition-all duration-300"
+            className="relative group  hover:scale-110 transition-all duration-300 hover:cursor-pointer"
           >
             Alerts Center
             <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-[#ffffff] mt-1 transition-all duration-300 ease-in-out group-hover:w-full"></div>
           </Link>
-          Scorecards
+
           <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-[#ffffff] mt-1 transition-all duration-300 ease-in-out group-hover:w-full"></div>
         </div>
       </div>

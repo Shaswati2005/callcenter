@@ -22,7 +22,7 @@ export default function CallStatus({ callSid }: Props) {
 
     fetchStatus(); // Initial fetch
 
-    const interval = setInterval(fetchStatus, 8000); // Every 2 seconds
+    const interval = setInterval(fetchStatus, 8000); // Every 8 seconds
 
     return () => clearInterval(interval); // Cleanup on unmount
   }, [callSid]);
@@ -30,7 +30,7 @@ export default function CallStatus({ callSid }: Props) {
   return (
     <div className="text-white bg-purple-600 px-4 py-2 rounded-xl flex gap-3">
       <p className="font-semibold">Call Status:</p>
-      <p className="h-fit">{status}</p>
+      <p className="h-fit">{status || "Checking.."}</p>
     </div>
   );
 }

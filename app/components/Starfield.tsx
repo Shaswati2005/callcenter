@@ -8,8 +8,8 @@ const StarField = () => {
     const size = `${Math.random() * 2 + 1}px`;
     const opacity = Math.random() * 0.5 + 0.3;
     const delay = `${Math.random() * 3}s`;
-    const twinkleDuration = `${2 + Math.random() * 3}s`; // 2–5s
-    const driftDuration = `${5 + Math.random() * 4}s`; // 8–12s
+    const twinkleDuration = `${0 + Math.random() * 3}s`; // 2–5s
+    const driftDuration = `${2 + Math.random() * 4}s`; // 8–12s
 
     stars.push(
       <div

@@ -12,10 +12,14 @@ import {
   Bar,
 } from "recharts";
 import { FiHome, FiActivity, FiAlertCircle } from "react-icons/fi";
-import TranscriptionClient from "../components/TranscriptionClient";
+
 import LiveTranscript from "../components/LiveTranscript";
+import { useState } from "react";
+import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 
 const Dashboard = () => {
+  const { user } = useUser();
+
   const barData = [
     { name: "Service", value: 2564 },
     { name: "Handling Time", value: 5564 },
@@ -71,18 +75,22 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="flex min-h-screen bg-[#121212] text-white">
+    <div className="flex relative h-screen bg-[#121212] text-white">
       {/* Sidebar */}
       <aside className="w-64 bg-[#1e1e2f] border-r border-[#2e2e3e] p-6 flex flex-col  gap-8 sticky top-0 h-screen">
         <h2 className="text-2xl font-bold text-[#a29bfe]">📊 Elite Support</h2>
         <nav className="flex flex-col gap-4">
-          <button className="flex items-center gap-3 text-[#a29bfe] hover:text-white">
+          <span className="flex w-full justify-start gap-4 items-center">
+            <UserButton />
+            {user?.username}
+          </span>
+          <button className="flex items-center gap-3 pl-1.5 text-[#a29bfe] hover:text-white">
             <FiHome /> Overview
           </button>
-          <button className="flex items-center gap-3 text-[#a29bfe] hover:text-white">
+          <button className="flex items-center gap-3 text-[#a29bfe] pl-1.5 hover:text-white">
             <FiActivity /> Performance
           </button>
-          <button className="flex items-center gap-3 text-[#a29bfe] hover:text-white">
+          <button className="flex items-center gap-3 text-[#a29bfe] pl-1.5 hover:text-white">
             <FiAlertCircle /> Alerts
           </button>
         </nav>
@@ -214,6 +222,9 @@ const Dashboard = () => {
           </table>
         </motion.div>
       </main>
+      <div className="absolute bottom-0">
+        <SignOutButton />
+      </div>
     </div>
   );
 };

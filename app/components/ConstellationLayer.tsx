@@ -20,7 +20,7 @@ const ConstellationLayer = () => {
       const spread = 700; // smaller = tighter cluster
 
       const newPoints: Point[] = [];
-
+ 
       for (let i = 0; i < count; i++) {
         const offsetTop = (Math.random() - 0.5) * spread;
         const offsetLeft = (Math.random() - 0.5) * spread;

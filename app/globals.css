@@ -24,3 +24,52 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.star-field {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+
+  /* ...other styles */
+  animation-name: twinkle, drift-horizontal;
+  animation-duration: 3s, 10s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate; /* ← smooth back and forth */
+  animation-timing-function: ease-in-out;
+}
+
+/* ✨ Twinkle effect (same) */
+@keyframes twinkle {
+  0% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+}
+
+/* 🌬️ Horizontal drifting effect */
+@keyframes drift-horizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(10px);
+  } /* gentle breeze to the right */
+}

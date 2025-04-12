@@ -70,7 +70,7 @@ export default function HeroSection() {
 
       {/* Services Section */}
       <section className="px-6 py-20 bg-[#1a0f2c]">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-3  gap-8">
           {[
             "24/7 Live Support",
             "Multilingual Assistance",
@@ -85,7 +85,7 @@ export default function HeroSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.15, duration: 0.5 }}
               viewport={{ once: true }}
-              className="bg-[#2a1742] rounded-2xl p-6 shadow-xl hover:scale-[1.02] transition-transform"
+              className="bg-[#2a1742] min-w-[250px] rounded-2xl p-6 shadow-lg hover:shadow-violet-600 hover:scale-[1.1]   transition-transform"
             >
               <h3 className="text-xl font-semibold text-white mb-2">
                 {service}

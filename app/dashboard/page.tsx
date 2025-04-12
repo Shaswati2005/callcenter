@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Sidebar from "../components/Sidebar";
 import {
   LineChart,
   Line,
@@ -19,7 +20,7 @@ import StarField from "../components/Starfield";
 import Link from "next/link";
 
 const Dashboard = () => {
-  const { user } = useUser();
+ 
 
   const barData = [
     { name: "Service", value: 2564 },
@@ -75,41 +76,15 @@ const Dashboard = () => {
     },
   ];
 
+
+  const { user, isLoaded } = useUser();
+
   return (
     <div className="flex relative h-screen bg-[#121212] text-white">
       {/* Sidebar */}
-      <aside className="w-64 bg-[#1e1e2f] border-r border-[#2e2e3e] p-6 flex flex-col  gap-8 sticky top-0 h-screen">
-        <h2 className="text-2xl font-bold text-[#a29bfe]">Elite Support</h2>
-        <nav className="flex flex-col gap-4">
-          <span className="flex w-full justify-start gap-4 items-center">
-            <UserButton />
-            {user?.username}
-          </span>
-          <button className="flex items-center gap-3 pl-1.5 text-[#a29bfe] hover:text-white">
-            <FiHome /> Overview
-          </button>
-          <button className="flex items-center gap-3 text-[#a29bfe] pl-1.5 hover:text-white">
-            <FiActivity /> Performance
-          </button>
-          <Link
-            href={"/alerts"}
-            className="flex items-center gap-3 text-[#a29bfe] pl-1.5 hover:text-white"
-          >
-            <FiAlertCircle /> Alerts
-          </Link>
-          <Link
-            href={"/calls"}
-            className="flex items-center gap-3 text-[#a29bfe] pl-1.5 hover:text-white"
-          >
-            <FiList /> Call Logs
-          </Link>
-        </nav>
-        <div className="absolute bottom-[50px] left-1/2 hover:cursor-pointer translate-x-[-50%]">
-          <div className="hover:cursor-pointer">
-            <SignOutButton />
-          </div>
-        </div>
-      </aside>
+      <Sidebar user={{ username: (user && user.username) || "Guest" }} />
+
+
 
       {/* Main Dashboard */}
       <main className="flex-1 p-8 overflow-auto">

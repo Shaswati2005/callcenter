@@ -6,6 +6,10 @@ import ToggleSwitch from "../components/ToggleSwitch";
 import { RxDropdownMenu } from "react-icons/rx";
 import Link from "next/link";
 import { useState } from "react";
+import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
+import Sidebar from "../components/Sidebar";
+
+
 
 const callCenterMessages = [
   "Dead air detected for more than 10 seconds",
@@ -40,29 +44,44 @@ const callCenterMessages = [
   "This call is being monitored for training",
 ];
 
+
+
 const Page = () => {
   const [search, setSearch] = useState("");
+  const { user, isLoaded } = useUser();
 
   const filteredMessages = callCenterMessages.filter((msg) =>
     msg.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
+    <>
+
+<div className=" flex md:hidden  ">
+      <Sidebar user={{ username: (user && user.username) || "Guest" }} />
+
+
+        
+      </div>
     <div className="w-screen h-screen flex flex-col items-center justify-start gap-4 bg-black text-white relative overflow-hidden">
-      <div className="w-[80%] mt-[100px] sticky top-5 z-10">
-        <div className="flex items-center justify-between gap-4 bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 shadow-md">
+
+
+
+
+      <div className="w-[80%] mt-[100px] relative top-5 z-10">
+        <div className="flex items-center justify-between gap-1 md:gap-4 bg-gray-800 border border-gray-600 rounded-lg px-4 py-3 shadow-md">
           <ToggleSwitch />
-          <div className="flex-1 ml-4 flex items-center gap-2 bg-gray-900 px-4 py-2 rounded-md border border-gray-600">
+          <div className="flex-1 ml-1  md:ml-4 flex items-center gap-2 bg-gray-900 px-4 py-2 rounded-md border border-gray-600">
             <FiSearch size={18} />
             <input
               type="text"
               placeholder="Search notifications"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="bg-transparent text-white outline-none flex-1"
+              className="bg-transparent text-white outline-none w-[50px] md:flex-1 "
             />
           </div>
-          <button className="flex items-center gap-2 px-4 py-2 bg-gray-700 hover:bg-gray-600 border border-gray-500 rounded-md text-sm">
+          <button className="flex items-center gap-2 p-1 md:px-4 md:py-2 bg-gray-700 hover:bg-gray-600 border border-gray-500 rounded-md  text-sm">
             Group By
             <RxDropdownMenu />
           </button>
@@ -85,6 +104,7 @@ const Page = () => {
 
       <StarField />
     </div>
+    </>
   );
 };
 

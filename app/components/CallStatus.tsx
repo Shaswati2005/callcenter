@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+
 interface Props {
   callSid: string;
 }
@@ -27,8 +28,11 @@ export default function CallStatus({ callSid }: Props) {
     return () => clearInterval(interval); // Cleanup on unmount
   }, [callSid]);
 
+  
+
   return (
     <div className="text-white bg-purple-600 px-4 py-2 rounded-xl flex gap-3">
+      
       <p className="font-semibold">Call Status:</p>
       <p className="h-fit">{status || "Checking.."}</p>
     </div>

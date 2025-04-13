@@ -1,14 +1,11 @@
 "use client";
 
 import * as React from "react";
-import { useUser } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
 import { CreateOrganization } from "@clerk/nextjs";
 import StarField from "../components/Starfield";
 
 export default function Page() {
-  const { user } = useUser();
-  const router = useRouter();
+ 
 
   return (
     <div className="px-8 py-12 sm:py-16 md:px-20">

@@ -5,7 +5,7 @@ import { FiPhone } from "react-icons/fi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import Link from "next/link";
 import { callLogs } from "./data"; // Import from your shared data file
-import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
+import {  useUser } from "@clerk/nextjs";
 import Sidebar from "../components/Sidebar";
 import StarField from "../components/Starfield";
 
@@ -31,7 +31,7 @@ const CallLogs = () => {
     }))
   );
 
-  const { user, isLoaded } = useUser();
+  const { user } = useUser();
 
   return (
     <>

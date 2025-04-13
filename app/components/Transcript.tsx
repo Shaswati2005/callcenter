@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import CallStatus from "./CallStatus";
-import { stringify } from "querystring";
+
 
 type TranscriptLine = {
   speaker: "Agent" | "Customer";
@@ -18,7 +18,7 @@ const mockTranscript: TranscriptLine[] = [
 ];
 
 export default function LiveTranscript() {
-  const [lines, setLines] = useState<TranscriptLine[]>(mockTranscript);
+  const [lines] = useState<TranscriptLine[]>(mockTranscript);
   const [number, setNumber] = useState("");
   const [showDialPad, setShowDialPad] = useState(false);
   const [loading, setLoading] = useState(false);

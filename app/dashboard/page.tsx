@@ -13,9 +13,9 @@ import {
   Bar,
   LabelList,
 } from "recharts";
-import { FiHome, FiActivity, FiAlertCircle, FiList } from "react-icons/fi";
+
 import Transcript from "../components/Transcript";
-import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
+import {  useUser } from "@clerk/nextjs";
 import StarField from "../components/Starfield";
 
 
@@ -77,7 +77,7 @@ const Dashboard = () => {
   ];
 
 
-  const { user, isLoaded } = useUser();
+  const { user } = useUser();
 
   return (
     <div className="flex relative h-screen bg-[#121212] text-white">

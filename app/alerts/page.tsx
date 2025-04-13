@@ -6,7 +6,7 @@ import ToggleSwitch from "../components/ToggleSwitch";
 import { RxDropdownMenu } from "react-icons/rx";
 import Link from "next/link";
 import { useState } from "react";
-import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import Sidebar from "../components/Sidebar";
 
 
@@ -48,7 +48,7 @@ const callCenterMessages = [
 
 const Page = () => {
   const [search, setSearch] = useState("");
-  const { user, isLoaded } = useUser();
+  const { user } = useUser();
 
   const filteredMessages = callCenterMessages.filter((msg) =>
     msg.toLowerCase().includes(search.toLowerCase())

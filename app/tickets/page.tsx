@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import Sidebar from "../components/Sidebar";
 import StarField from "../components/Starfield";
 

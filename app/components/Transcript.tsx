@@ -40,7 +40,7 @@ export default function LiveTranscript() {
     setLoading(true);
     try {
       const res = await fetch(
-        "https://01ba-171-48-110-117.ngrok-free.app/start-call",
+        "https://e7b7-171-48-110-91.ngrok-free.app/start-call",
         {
           method: "POST",
           body: JSON.stringify({ to: `+91${number}` }),

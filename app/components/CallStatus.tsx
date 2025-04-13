@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
 
 interface Props {
   callSid: string;
@@ -9,7 +8,7 @@ interface Props {
 
 export default function CallStatus({ callSid }: Props) {
   const [status, setStatus] = useState<string>("Checking...");
-  
+
   useEffect(() => {
     const fetchStatus = async () => {
       try {
@@ -32,7 +31,7 @@ export default function CallStatus({ callSid }: Props) {
 
     // Initial fetch
 
-    const interval = setInterval(fetchStatus, 2000); // Poll every 4 seconds
+    const interval = setInterval(fetchStatus, 4000); // Poll every 4 seconds
 
     return () => clearInterval(interval); // Cleanup
   }, [callSid]);

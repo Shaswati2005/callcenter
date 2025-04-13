@@ -82,7 +82,7 @@ const Sidebar: React.FC<SidebarProps> = ({ user }) => {
             <FileTextIcon size={20} /> <span>Tickets</span>
           </Link>
           <Link
-            href="/tickets"
+            href="/send-message"
             className="flex items-center gap-2 text-[#a29bfe] hover:text-white"
           >
             <FiMessageCircle size={20} /> <span>Send Message</span>

@@ -8,6 +8,7 @@ import { callLogs } from "./data"; // Import from your shared data file
 import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 import Sidebar from "../components/Sidebar";
 
+
 type CallLog = {
   id: string;
   caller: string;

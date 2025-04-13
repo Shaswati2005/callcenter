@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 import Sidebar from "../components/Sidebar";
+import StarField from "../components/Starfield";
 
 interface Ticket {
   id: number;
@@ -75,6 +76,7 @@ const TicketPage: React.FC = () => {
 
   return (
     <div>
+
       <div className="flex md:hidden">
         <Sidebar user={{ username: (user && user.username) || "Guest" }} />
       </div>
@@ -224,6 +226,7 @@ const TicketPage: React.FC = () => {
           </div>
         )}
       </div>
+      <StarField/>
     </div>
   );
 };

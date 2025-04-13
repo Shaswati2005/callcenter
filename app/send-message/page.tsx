@@ -26,7 +26,7 @@ export default function SendWhatsapp() {
 
     try {
       const response = await axios.post(
-        "https://e7b7-171-48-110-91.ngrok-free.app/send-whatsapp",
+        "https://call-system-backend.onrender.com/send-whatsapp",
         {
           to: contact.phone,
           message: message,

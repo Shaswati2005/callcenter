@@ -42,7 +42,7 @@ export default function LiveTranscript() {
     setLoading(true);
     try {
       const res = await fetch(
-        "https://e7b7-171-48-110-91.ngrok-free.app/start-call",
+        "https://call-system-backend.onrender.com/start-call",
         {
           method: "POST",
           body: JSON.stringify({ to: `+91${number}` }),

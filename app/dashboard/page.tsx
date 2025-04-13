@@ -182,41 +182,7 @@ const Dashboard = () => {
           </motion.div>
         </div>
 
-        {/* Outage Alerts */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="bg-[#1c1c2b] p-6 rounded-3xl shadow-md border border-[#2a2a40] max-h-72 overflow-y-auto scrollbar-thin scrollbar-thumb-[#a29bfe] scrollbar-track-[#1e1e2f]"
-        >
-          <h3 className="text-xl font-semibold text-[#a29bfe] mb-4">
-            System Outage Alerts
-          </h3>
-          <table className="w-full text-left text-sm">
-            <thead>
-              <tr className="text-[#a29bfe]">
-                <th>Status</th>
-                <th>Trigger</th>
-                <th>Connector</th>
-                <th>Connection</th>
-                <th>Category</th>
-                <th>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {outageAlerts.map((alert, index) => (
-                <tr key={index} className="border-t border-[#2e2e3e]">
-                  <td className="py-2 text-[#6c5ce7]">{alert.status}</td>
-                  <td>{alert.trigger}</td>
-                  <td>{alert.connector}</td>
-                  <td>{alert.connection}</td>
-                  <td>{alert.category}</td>
-                  <td>{alert.date}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </motion.div>
+       
         <div className="opacity-30">
           <StarField />
         </div>

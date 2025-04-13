@@ -42,7 +42,7 @@ const CallLogs = () => {
       <div className="w-full min-h-screen bg-gray-950 text-white px-8 py-10">
         <h1 className="text-2xl font-semibold mb-6">📞 Call Logs</h1>
         <div className="bg-gray-900 rounded-xl overflow-hidden border border-gray-700 w-full">
-          <div className="flex flex-row w-full items-center justify-start gap-50  font-medium text-sm uppercase border-b border-gray-700 px-6 py-3 text-gray-400">
+          <div className="flex flex-row w-full items-center justify-between gap-10  font-medium text-sm uppercase border-b border-gray-700 px-6 py-3 text-gray-400">
             <span>Caller</span>
             <span>Callee</span>
             <span className="hidden md:flex">Duration</span>

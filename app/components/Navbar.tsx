@@ -62,28 +62,21 @@ const Navbar = () => {
             Dashboard
             <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-[#ffffff] mt-1 transition-all duration-300 ease-in-out group-hover:w-full"></div>
           </Link>
-          <button className="relative group  hover:scale-110 transition-all duration-300 hover:cursor-pointer">
-            Agent Reports
-            <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-[#ffffff] mt-1 transition-all duration-300 ease-in-out group-hover:w-full"></div>
-          </button>
-          <Link
-            href={"/"}
-            title="past "
-            className="relative group  hover:scale-110 transition-all duration-300 hover:cursor-pointer"
-          >
-            Call History
+          <Link  href={"/leads"} className="relative group  hover:scale-110 transition-all duration-300 hover:cursor-pointer">
+           Leads
             <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-[#ffffff] mt-1 transition-all duration-300 ease-in-out group-hover:w-full"></div>
           </Link>
+          
           <Link
-            href={"/"}
+            href={"/dashboard"}
             title="past "
             className="relative group  hover:scale-110 transition-all duration-300 hover:cursor-pointer"
           >
-            Language Insights
+            Transcript
             <div className="absolute bottom-0 rounded-xl left-0 w-0 h-[3px] mt-1 bg-[#ffffff] transition-all duration-300 ease-in-out group-hover:w-full"></div>
           </Link>
           <Link
-            href={"/"}
+            href={"/alerts"}
             title="updates"
             className="relative group  hover:scale-110 transition-all duration-300 hover:cursor-pointer"
           >
@@ -96,8 +89,8 @@ const Navbar = () => {
       </div>
 
       {isMenuOpen && (
-        <div className="lg:hidden  bg-opacity-50 p-4">
-          <div className="flex flex-col absolute right-2 items-center gap-4 p-4 max-w-[400px] w-full bg-[#ffffff] text-white">
+        <div className="lg:hidden  backdrop-blur-2xl p-4">
+          <div className="flex flex-col w-[300px] h-fit py-5  absolute right-2 items-center gap-4 p-4 backdrop-blur-2xl bg-[#2a0739]  text-white">
             <Link
               href={"/"}
               title="home"
@@ -105,33 +98,27 @@ const Navbar = () => {
             >
               Home
             </Link>
-            <button className="hover:bg-[#8d44ad64] w-full h-fit text-center">
-              About us
-            </button>
-            <button className="hover:bg-[#8d44ad64] w-full h-fit text-center">
-              Destination
-            </button>
+            <Link href={"/dashboard"} className="hover:bg-[#8d44ad64] w-full h-fit text-center">
+              Dashboard
+            </Link>
+            <Link href={"/leads"} className="hover:bg-[#8d44ad64] w-full h-fit text-center">
+               Leads
+            </Link>
             <Link
-              href={"/"}
+              href={"/dashboard"}
               title="past "
               className="hover:bg-[#8d44ad64] w-full h-fit text-center"
             >
-              Past tours
+              Transcript 
             </Link>
             <Link
-              href={"/"}
+              href={"/alerts"}
               title="home"
               className="hover:bg-[#8d44ad64] w-full h-fit text-center"
             >
-              Bookings
+              Alerts center 
             </Link>
-            <Link
-              href={"/"}
-              title="updates "
-              className="hover:bg-[#8d44ad64] w-full h-fit text-center"
-            >
-              Updates
-            </Link>
+            
           </div>
         </div>
       )}

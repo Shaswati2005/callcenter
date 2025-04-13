@@ -57,12 +57,14 @@ const Sidebar: React.FC<SidebarProps> = ({ user }) => {
             <span className="hidden md:inline">{user?.username}</span>
           </span>
 
-          <button className="flex items-center gap-2 text-[#a29bfe] hover:text-white">
+          <Link href={"/dashboard"}
+          className="flex items-center gap-2 text-[#a29bfe] hover:text-white">
             <FiHome size={20} /> <span>Overview</span>
-          </button>
-          <button className="flex items-center gap-2 text-[#a29bfe] hover:text-white">
+          </Link>
+          <Link href={"/dashboard"}
+           className="flex items-center gap-2 text-[#a29bfe] hover:text-white">
             <FiActivity size={20} /> <span>Performance</span>
-          </button>
+          </Link>
           <Link
             href="/alerts"
             className="flex items-center gap-2 text-[#a29bfe] hover:text-white"

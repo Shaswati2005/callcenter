@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import CallStatus from "./CallStatus";
+import { stringify } from "querystring";
 
 type TranscriptLine = {
   speaker: "Agent" | "Customer";
@@ -23,7 +24,8 @@ export default function LiveTranscript() {
   const [loading, setLoading] = useState(false);
   const [sid, setSid] = useState("");
   const transcriptEndRef = useRef<HTMLDivElement>(null);
-
+  const [recorder, setrecorder] = useState("");
+  const [transcript, settranscript] = useState(false);
   useEffect(() => {
     transcriptEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [lines]);
@@ -99,24 +101,36 @@ export default function LiveTranscript() {
       </div>
 
       <div className="w-full flex flex-col md:flex-row justify-center md:justify-between items-center gap-4 p-2 border-t border-[#2e2e44]">
-        <div className="flex gap-2 items-center">
+        <div className="flex flex-wrap gap-2 items-center">
           <input
             type="tel"
             value={number}
             onFocus={() => setShowDialPad(true)}
             onChange={(e) => setNumber(e.target.value)}
-            placeholder="Enter Contact (+91)"
-            className="bg-gray-700 text-white px-3 py-2 rounded-xl outline-none w-48"
+            placeholder="Enter Contact"
+            className="bg-gray-700 text-white px-3 py-2 rounded-xl outline-none w-30 lg:w-48"
           />
           <button
             onClick={handleCall}
             disabled={loading}
-            className={`px-4 py-2 rounded-xl ${
+            className={`px-4 py-2 text-sm rounded-xl ${
               loading ? "bg-gray-600" : "bg-green-600 hover:bg-green-700"
             } text-white`}
           >
             {loading ? "Calling..." : "Make Call"}
           </button>
+
+          <input className="bg-gray-700 text-sm text-white px-3 py-2 rounded-xl outline-none w-30 lg:w-48"
+          type="string" placeholder="enter the url for recording " onChange={(e)=> setrecorder(e.target.value)} >
+          </input>
+
+          <button onClick={()=> (settranscript(true))} className="px-1 rounded-xl bg-violet-500 py-2">
+            Transcribe
+
+          </button>
+
+
+
         </div>
 
         <CallStatus callSid={sid} />

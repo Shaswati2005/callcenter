@@ -36,12 +36,12 @@ export default function HeroSection() {
             transition={{ delay: 0.6, duration: 0.6 }}
             className="flex justify-center gap-4 flex-wrap"
           >
-            <button className="bg-[#8e44ad] hover:bg-[#732d91] text-white px-6 py-3 rounded-2xl shadow-lg flex items-center">
-              <PhoneCall className="mr-2 h-5 w-5" /> Contact Sales
-            </button>
-            <button className="border border-[#8e44ad] text-[#8e44ad] hover:bg-[#8e44ad]/10 px-6 py-3 rounded-2xl">
-              Learn More
-            </button>
+            <Link href={"/signup"} className="bg-[#8e44ad] hover:bg-[#732d91] text-white px-6 py-3 rounded-2xl shadow-lg flex items-center">
+               Signup
+            </Link>
+            <Link href={"/login"} className="border border-[#8e44ad] text-[#8e44ad] hover:bg-[#8e44ad]/10 px-6 py-3 rounded-2xl">
+              Login
+            </Link>
           </motion.div>
         </div>
       </section>

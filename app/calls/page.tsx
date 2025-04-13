@@ -1,14 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FiPhone } from "react-icons/fi";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import Link from "next/link";
 import { callLogs } from "./data"; // Import from your shared data file
-import {  useUser } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 import Sidebar from "../components/Sidebar";
 import StarField from "../components/Starfield";
-
 
 type CallLog = {
   id: string;
@@ -20,18 +19,34 @@ type CallLog = {
 };
 
 const CallLogs = () => {
-  const [logs] = useState<CallLog[]>(
-    callLogs.map(({ id, caller, callee, duration, timestamp, status }) => ({
-      id,
-      caller,
-      callee,
-      duration,
-      timestamp,
-      status: status as "completed" | "missed" | "ongoing",
-    }))
-  );
-
   const { user } = useUser();
+
+  const [logs, setLogs] = useState<CallLog[]>([]);
+
+  useEffect(() => {
+    const fetchCalls = async () => {
+      try {
+        const response = await fetch(
+          `https://april-cohort.onrender.com/calls/+19412057703/`
+        );
+        const data = await response.json();
+        console.log(data);
+        const mappedCalls = data.map((call: any) => ({
+          id: String(call.id),
+          caller: call.caller_number || "Unknown",
+          callee: "Agent",
+          duration: call.call_duration || "00:00:00",
+          timestamp: new Date().toLocaleString(),
+          status: "completed" as const,
+        }));
+        setLogs(mappedCalls);
+      } catch (error) {
+        console.error("Failed to fetch calls, using fallback data:", error);
+      }
+    };
+
+    fetchCalls();
+  }, []);
 
   return (
     <>
@@ -81,7 +96,7 @@ const CallLogs = () => {
           ))}
         </div>
       </div>
-      <StarField/>
+      <StarField />
     </>
   );
 };

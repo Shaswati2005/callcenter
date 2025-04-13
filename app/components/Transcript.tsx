@@ -86,7 +86,7 @@ export default function LiveTranscript() {
         📝 Live Transcript
       </h2>
 
-      <div className="overflow-y-auto mb-4 flex-1">
+      <div className="overflow-y-auto mt-2 mb-2 flex-1">
         <span
           className={`px-4 py-2 rounded-2xl max-w-[80%] text-sm 
               

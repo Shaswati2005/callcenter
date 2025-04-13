@@ -3,19 +3,13 @@ import { useEffect, useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import CallStatus from "./CallStatus";
 
-
 type TranscriptLine = {
   speaker: "Agent" | "Customer";
   text: string;
   timestamp?: string;
 };
 
-const mockTranscript: TranscriptLine[] = [
-  { speaker: "Agent", text: "Hello! How can I assist you today?" },
-  { speaker: "Customer", text: "Hi, I’d like to cancel my order." },
-  { speaker: "Agent", text: "I understand. May I ask why you’re canceling?" },
-  { speaker: "Customer", text: "I found a better deal elsewhere." },
-];
+const mockTranscript: TranscriptLine[] = [];
 
 export default function LiveTranscript() {
   const [lines] = useState<TranscriptLine[]>(mockTranscript);
@@ -25,13 +19,28 @@ export default function LiveTranscript() {
   const [sid, setSid] = useState("");
   const transcriptEndRef = useRef<HTMLDivElement>(null);
   const [recorder, setrecorder] = useState("");
-  const [transcript, settranscript] = useState(false);
+  const [line, setLine] = useState<string>("");
+
   useEffect(() => {
     transcriptEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [lines]);
 
   const handleNumberInput = (digit: string) => {
     setNumber((prev) => (prev.length < 15 ? prev + digit : prev));
+  };
+
+  const fetchTranscript = async () => {
+    try {
+      const res = await fetch(
+        `https://call-system-backend.onrender.com/get-transcript?url=${recorder}`
+      );
+
+      const body = await res.json();
+      console.log(body);
+      setLine(body.transcript);
+    } catch (error: any) {
+      console.log(error.message);
+    }
   };
 
   const handleCall = async () => {
@@ -79,24 +88,16 @@ export default function LiveTranscript() {
       </h2>
 
       <div className="overflow-y-auto mb-4 flex-1">
-        {lines.map((line, idx) => (
-          <div
-            key={idx}
-            className={`flex flex-col ${
-              line.speaker === "Agent" ? "items-start" : "items-end"
-            } mb-2`}
-          >
-            <span
-              className={`px-4 py-2 rounded-2xl max-w-[80%] text-sm ${
-                line.speaker === "Agent"
-                  ? "bg-purple-800 text-purple-100"
-                  : "bg-purple-100 text-purple-800"
-              }`}
-            >
-              <strong>{line.speaker}:</strong> {line.text}
-            </span>
-          </div>
-        ))}
+        <span
+          className={`px-4 py-2 rounded-2xl max-w-[80%] text-sm 
+              
+                bg-purple-800 text-purple-100
+                
+            }`}
+        >
+          <strong>{line}</strong>
+        </span>
+
         <div ref={transcriptEndRef} />
       </div>
 
@@ -120,17 +121,19 @@ export default function LiveTranscript() {
             {loading ? "Calling..." : "Make Call"}
           </button>
 
-          <input className="bg-gray-700 text-sm text-white px-3 py-2 rounded-xl outline-none w-30 lg:w-48"
-          type="string" placeholder="enter the url for recording " onChange={(e)=> setrecorder(e.target.value)} >
-          </input>
+          <input
+            className="bg-gray-700 text-sm text-white px-3 py-2 rounded-xl outline-none w-30 lg:w-48"
+            type="string"
+            placeholder="enter the url for recording "
+            onChange={(e) => setrecorder(e.target.value)}
+          ></input>
 
-          <button onClick={()=> (settranscript(true))} className="px-1 rounded-xl bg-violet-500 py-2">
+          <button
+            onClick={() => fetchTranscript()}
+            className="px-1 rounded-xl bg-violet-500 py-2"
+          >
             Transcribe
-
           </button>
-
-
-
         </div>
 
         <CallStatus callSid={sid} />

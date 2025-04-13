@@ -19,6 +19,7 @@
 
 # production
 /build
+/call_system_backend
 
 # misc
 .DS_Store
@@ -39,3 +40,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+package-lock.json
+package-lock.json
+package-lock.json
+/call_system_backend

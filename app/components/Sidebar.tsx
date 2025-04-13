@@ -1,18 +1,22 @@
 import { useState } from "react";
-import { FiHome, FiActivity, FiAlertCircle, FiList, FiMenu, FiX } from "react-icons/fi";
+import {
+  FiHome,
+  FiActivity,
+  FiAlertCircle,
+  FiList,
+  FiMenu,
+  FiX,
+  FiMessageCircle,
+} from "react-icons/fi";
 import Link from "next/link";
 import { UserButton, SignOutButton } from "@clerk/nextjs";
 import { FileTextIcon } from "lucide-react";
 
-
-
 interface SidebarProps {
-    user: {
-      username: string;
-    };
-  }
-
-  
+  user: {
+    username: string;
+  };
+}
 
 const Sidebar: React.FC<SidebarProps> = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,35 +47,45 @@ const Sidebar: React.FC<SidebarProps> = ({ user }) => {
         </div>
 
         {/* Navigation Items */}
-        <nav className={`flex flex-col gap-4 ${isOpen ? "block" : "hidden"} md:flex`}>
+        <nav
+          className={`flex flex-col gap-4 ${
+            isOpen ? "block" : "hidden"
+          } md:flex`}
+        >
           <span className="flex items-center gap-3 text-[#a29bfe]">
             <UserButton />
             <span className="hidden md:inline">{user?.username}</span>
           </span>
 
           <button className="flex items-center gap-2 text-[#a29bfe] hover:text-white">
-            <FiHome /> <span>Overview</span>
+            <FiHome size={20} /> <span>Overview</span>
           </button>
           <button className="flex items-center gap-2 text-[#a29bfe] hover:text-white">
-            <FiActivity /> <span>Performance</span>
+            <FiActivity size={20} /> <span>Performance</span>
           </button>
           <Link
             href="/alerts"
             className="flex items-center gap-2 text-[#a29bfe] hover:text-white"
           >
-            <FiAlertCircle /> <span>Alerts</span>
+            <FiAlertCircle size={20} /> <span>Alerts</span>
           </Link>
           <Link
             href="/calls"
             className="flex items-center gap-2 text-[#a29bfe] hover:text-white"
           >
-            <FiList /> <span>Call Logs</span>
+            <FiList size={20} /> <span>Call Logs</span>
           </Link>
           <Link
             href="/tickets"
             className="flex items-center gap-2 text-[#a29bfe] hover:text-white"
           >
-            <FileTextIcon /> <span>Tickets</span>
+            <FileTextIcon size={20} /> <span>Tickets</span>
+          </Link>
+          <Link
+            href="/tickets"
+            className="flex items-center gap-2 text-[#a29bfe] hover:text-white"
+          >
+            <FiMessageCircle size={20} /> <span>Send Message</span>
           </Link>
         </nav>
 

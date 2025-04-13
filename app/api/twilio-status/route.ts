@@ -1,12 +1,17 @@
-import { NextResponse } from 'next/server';
+export async function GET() {
+  try {
+    const flaskUrl = "https://01ba-171-48-110-117.ngrok-free.app/call-status";
+    const res = await fetch(flaskUrl);
 
-export async function POST(req: Request) {
-  const formData = await req.formData();
-  const callSid = formData.get('CallSid');
-  const callStatus = formData.get('CallStatus');
+    const text = await res.text();
 
-  console.log(`Call SID: ${callSid} | Status: ${callStatus}`);
-
-  // Optional: Save to DB or emit to WebSocket
-  return NextResponse.json({ received: true,st:callStatus });
+    try {
+      const json = JSON.parse(text);
+      return Response.json(json);
+    } catch (err) {
+      return new Response("Invalid JSON from Flask", { status: 502 });
+    }
+  } catch (err: any) {
+    return new Response("Failed to reach Flask server", { status: 500 });
+  }
 }

@@ -38,31 +38,33 @@ export default function LiveTranscript() {
       return;
     }
     setLoading(true);
-    // try {
-    //   const res = await fetch("/api/twilio-call", {
-    //     method: "POST",
-    //     body: JSON.stringify({ to: `+91${number}` }),
-    //     headers: { "Content-Type": "application/json" },
-    //   });
+    try {
+      const res = await fetch(
+        "https://01ba-171-48-110-117.ngrok-free.app/start-call",
+        {
+          method: "POST",
+          body: JSON.stringify({ to: `+91${number}` }),
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
-    //   const contentType = res.headers.get("content-type");
-    //   if (!res.ok || !contentType?.includes("application/json")) {
-    //     throw new Error("Invalid server response.");
-    //   }
-
-    //   const data = await res.json();
-    //   if (data.success) {
-    //     toast.success(`Call started: ${data.callSid}`);
-    //     setSid(data.callSid);
-    //   } else {
-    //     toast.error(`Call failed: ${data.error}`);
-    //     setSid("");
-    //   }
-    // } catch (error) {
-    //   toast.error("Call could not be started.");
-    // } finally {
-    //   setLoading(false);
-    // }
+      const contentType = res.headers.get("content-type");
+      if (!res.ok || !contentType?.includes("application/json")) {
+        toast.error("Invalid server response.");
+      }
+      const data = await res.json();
+      if (res.status === 200) {
+        toast.success(`Call started: ${data.sid}`);
+        setSid(data.sid);
+      } else {
+        toast.error(`Call failed: ${data.error}`);
+        setSid("");
+      }
+    } catch (error) {
+      toast.error("Call could not be started.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -70,7 +72,9 @@ export default function LiveTranscript() {
       className="relative bg-[#1e1e2f] rounded-xl p-4 shadow-inner border border-[#2e2e44] 
       h-[80vh] w-full max-w-5xl mx-auto mb-8 flex flex-col justify-between"
     >
-      <h2 className="text-lg font-semibold text-purple-400 mb-3">📝 Live Transcript</h2>
+      <h2 className="text-lg font-semibold text-purple-400 mb-3">
+        📝 Live Transcript
+      </h2>
 
       <div className="overflow-y-auto mb-4 flex-1">
         {lines.map((line, idx) => (
@@ -141,20 +145,21 @@ export default function LiveTranscript() {
 
             {/* Dial Pad Grid */}
             <div className="grid grid-cols-3 gap-3 w-full">
-              {["1", "2", "3", "4", "5", "6", "7", "8", "9", "*", "0", "#"].map((digit) => (
-                <button
-                  key={digit}
-                  onClick={() => handleNumberInput(digit)}
-                  className="bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-full text-lg shadow-md"
-                >
-                  {digit}
-                </button>
-        ))}
-      </div>
-    </div>
-  </div>
-)}
-
+              {["1", "2", "3", "4", "5", "6", "7", "8", "9", "*", "0", "#"].map(
+                (digit) => (
+                  <button
+                    key={digit}
+                    onClick={() => handleNumberInput(digit)}
+                    className="bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-full text-lg shadow-md"
+                  >
+                    {digit}
+                  </button>
+                )
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       <Toaster />
     </div>

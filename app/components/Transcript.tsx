@@ -34,7 +34,6 @@ export default function LiveTranscript() {
       const res = await fetch(
         `https://call-system-backend.onrender.com/get-transcript?url=${recorder}`
       );
-
       const body = await res.json();
       console.log(body);
       setLine(body.transcript);

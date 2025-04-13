@@ -9,7 +9,7 @@ interface CallPageProps {
   params: { id: string };
 }
 
-const CallPage: FC<CallPageProps> = ({ params }) => {
+const CallPage = ({ params }: CallPageProps) => {
   const call = callLogs.find((c) => c.id === params.id);
 
   if (!call) return notFound();

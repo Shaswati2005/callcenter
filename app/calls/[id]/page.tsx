@@ -1,16 +1,15 @@
-// app/call-logs/[id]/page.tsx
-
 import { notFound } from "next/navigation";
-import { callLogs } from "../data"; // Adjust the path if needed
 import { FiDownload } from "react-icons/fi";
 import StarField from "@/app/components/Starfield";
+import { callLogs } from "../data"; // adjust if needed
 
-interface CallPageProps {
-  params: { id: string };
-}
-
-export default async function CallPage({ params }: CallPageProps) {
-  const call = callLogs.find((c) => c.id === params.id);
+export default async function CallPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const call = callLogs.find((c) => c.id === id);
 
   if (!call) return notFound();
 
@@ -18,7 +17,7 @@ export default async function CallPage({ params }: CallPageProps) {
     <div className="min-h-screen bg-gray-950 text-white px-6 py-10">
       <div className="max-w-4xl mx-auto bg-gray-800 border border-gray-600 rounded-lg p-6 shadow-lg">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold"> Call Details</h2>
+          <h2 className="text-2xl font-bold">Call Details</h2>
           <a
             href={call.recordingUrl}
             download

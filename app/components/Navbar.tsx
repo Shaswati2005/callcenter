@@ -1,11 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+   const scrollref = useRef(null);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -84,6 +84,16 @@ const Navbar = () => {
             <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-[#ffffff] mt-1 transition-all duration-300 ease-in-out group-hover:w-full"></div>
           </Link>
 
+          <Link
+            href={"/alerts"}
+            ref={scrollref}
+            title="updates"
+            className="relative group  hover:scale-110 transition-all duration-300 hover:cursor-pointer"
+          >
+            About us
+            <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-[#ffffff] mt-1 transition-all duration-300 ease-in-out group-hover:w-full"></div>
+          </Link>
+
           <div className="absolute bottom-0 left-0 w-0 h-[3px] bg-[#ffffff] mt-1 transition-all duration-300 ease-in-out group-hover:w-full"></div>
         </div>
       </div>
@@ -117,6 +127,14 @@ const Navbar = () => {
               className="hover:bg-[#8d44ad64] w-full h-fit text-center"
             >
               Alerts center 
+            </Link>
+            
+            <Link
+              href={"/alerts"}
+              title="home"
+              className="hover:bg-[#8d44ad64] w-full h-fit text-center"
+            >
+              Abouut us 
             </Link>
             
           </div>

@@ -12,13 +12,13 @@ export default function CallStatus({ callSid }: Props) {
 
   useEffect(() => {
     const fetchStatus = async () => {
-      try {
-        const res = await fetch(`/api/check-call-status?sid=${callSid}`);
-        const data = await res.json();
-        setStatus(data.status);
-      } catch (err) {
-        console.error("Failed to fetch call status:", err);
-      }
+      // try {
+      //   const res = await fetch(`/api/check-call-status?sid=${callSid}`);
+      //   const data = await res.json();
+      //   setStatus(data.status);
+      // } catch (err) {
+      //   console.error("Failed to fetch call status:", err);
+      // }
     };
 
     fetchStatus(); // Initial fetch

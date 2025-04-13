@@ -14,10 +14,10 @@ import {
   LabelList,
 } from "recharts";
 import { FiHome, FiActivity, FiAlertCircle, FiList } from "react-icons/fi";
-import LiveTranscript from "../components/LiveTranscript";
+import Transcript from "../components/Transcript";
 import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 import StarField from "../components/Starfield";
-import Link from "next/link";
+
 
 const Dashboard = () => {
  
@@ -96,7 +96,7 @@ const Dashboard = () => {
         >
           📞 Call Center Performance
         </motion.h1>
-        <LiveTranscript />
+        <Transcript />
         {/* Metrics */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {barData.map((item, idx) => (

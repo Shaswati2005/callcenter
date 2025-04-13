@@ -7,6 +7,7 @@ import Link from "next/link";
 import { callLogs } from "./data"; // Import from your shared data file
 import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
 import Sidebar from "../components/Sidebar";
+import StarField from "../components/Starfield";
 
 
 type CallLog = {
@@ -80,6 +81,7 @@ const CallLogs = () => {
           ))}
         </div>
       </div>
+      <StarField/>
     </>
   );
 };

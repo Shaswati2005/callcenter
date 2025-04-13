@@ -1,6 +1,6 @@
 export async function GET() {
   try {
-    const flaskUrl = "https://e7b7-171-48-110-91.ngrok-free.app/call-status";
+    const flaskUrl = "https://call-system-backend.onrender.com/call-status";
     const res = await fetch(flaskUrl);
 
     const text = await res.text();

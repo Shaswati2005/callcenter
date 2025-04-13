@@ -12,8 +12,13 @@ type Call = {
   transcript: string;
 };
 
-export default async function CallPage({ params }: { params: { id: string } }) {
+export default async function CallPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   // Fetch all call data from the backend
+  const { id } = await params;
   const res = await fetch(
     `https://april-cohort.onrender.com/calls/+19412057703`,
     {
@@ -28,7 +33,7 @@ export default async function CallPage({ params }: { params: { id: string } }) {
   const data: Call[] = await res.json();
 
   // Find the specific call by ID
-  const call = data.find((c) => c.id.toString() === params.id);
+  const call = data.find((c) => c.id.toString() === id);
 
   if (!call) return notFound();
 

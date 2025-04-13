@@ -1,7 +1,7 @@
 // app/call-logs/[id]/page.tsx
+
 import { notFound } from "next/navigation";
-import { callLogs } from "../data"; // wherever your dummy data is stored
-import { FC } from "react";
+import { callLogs } from "../data"; // Adjust the path if needed
 import { FiDownload } from "react-icons/fi";
 import StarField from "@/app/components/Starfield";
 
@@ -9,7 +9,7 @@ interface CallPageProps {
   params: { id: string };
 }
 
-const CallPage = ({ params }: CallPageProps) => {
+export default async function CallPage({ params }: CallPageProps) {
   const call = callLogs.find((c) => c.id === params.id);
 
   if (!call) return notFound();
@@ -63,6 +63,4 @@ const CallPage = ({ params }: CallPageProps) => {
       <StarField />
     </div>
   );
-};
-
-export default CallPage;
+}

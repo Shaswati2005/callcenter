@@ -1,6 +1,8 @@
-"use client"
+"use client";
 
 import React, { useState } from "react";
+import { SignOutButton, UserButton, useUser } from "@clerk/nextjs";
+import Sidebar from "../components/Sidebar";
 
 interface Ticket {
   id: number;
@@ -15,6 +17,7 @@ interface Ticket {
 }
 
 const TicketPage: React.FC = () => {
+  const { user, isLoaded } = useUser();
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [form, setForm] = useState<{ title: string; description: string; customerName: string; createdBy: string }>({
     title: "",
@@ -23,6 +26,7 @@ const TicketPage: React.FC = () => {
     createdBy: ""
   });
 
+  const [showForm, setShowForm] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState<Ticket | null>(null);
 
   const handleCreateTicket = () => {
@@ -44,6 +48,7 @@ const TicketPage: React.FC = () => {
 
     setTickets([newTicket, ...tickets]);
     setForm({ title: "", description: "", customerName: "", createdBy: "" });
+    setShowForm(false);
   };
 
   const markAsResolved = (id: number) => {
@@ -68,54 +73,14 @@ const TicketPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 p-6 text-white">
+    <div className="relative min-h-screen bg-gray-900 p-6 text-white">
+      <div className="flex md:hidden">
+        <Sidebar user={{ username: (user && user.username) || "Guest" }} />
+      </div>
+
       <h1 className="text-3xl font-bold mb-8">🎫 Call Center Ticketing System</h1>
 
-      {/* Responsive Split Layout */}
       <div className="flex flex-col lg:flex-row gap-6">
-        
-        {/* Left: Create Ticket Form */}
-        <div className="lg:w-1/2 bg-gray-800 rounded-xl p-4 border border-gray-700">
-          <h2 className="text-lg font-semibold mb-4">Create New Ticket</h2>
-          <div className="flex flex-col gap-3">
-            <input
-              type="text"
-              placeholder="Enter Issue Title"
-              className="p-2 rounded bg-gray-900 border border-gray-700 text-white"
-              value={form.title}
-              onChange={(e) => setForm({ ...form, title: e.target.value })}
-            />
-            <textarea
-              placeholder="Describe the Issue"
-              className="p-2 rounded bg-gray-900 border border-gray-700 text-white"
-              rows={3}
-              value={form.description}
-              onChange={(e) => setForm({ ...form, description: e.target.value })}
-            />
-            <input
-              type="text"
-              placeholder="Customer Name"
-              className="p-2 rounded bg-gray-900 border border-gray-700 text-white"
-              value={form.customerName}
-              onChange={(e) => setForm({ ...form, customerName: e.target.value })}
-            />
-            <input
-              type="text"
-              placeholder="Created By (Agent Name)"
-              className="p-2 rounded bg-gray-900 border border-gray-700 text-white"
-              value={form.createdBy}
-              onChange={(e) => setForm({ ...form, createdBy: e.target.value })}
-            />
-            <button
-              onClick={handleCreateTicket}
-              className="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded"
-            >
-              Create Ticket
-            </button>
-          </div>
-        </div>
-
-        {/* Right: Ticket List */}
         <div className="lg:w-1/2 bg-gray-800 rounded-xl p-4 border border-gray-700">
           <h2 className="text-lg font-semibold">📋 Ticket List</h2>
           {tickets.length === 0 ? (
@@ -148,49 +113,104 @@ const TicketPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Ticket Details Panel */}
-      {selectedTicket && (
-        <div className="fixed top-0 right-0 w-full sm:w-1/3 h-full bg-gray-800 shadow-lg border-l border-gray-700 p-6 overflow-y-auto">
-          <button
-            className="text-gray-400 hover:text-white text-sm mb-4"
-            onClick={() => setSelectedTicket(null)}
-          >
-            Close ✖️
-          </button>
-          <h2 className="text-2xl font-bold mb-2">{selectedTicket.title}</h2>
-          <p className="text-gray-400 mb-2">Status: 
-            <span className={`ml-2 ${
-              selectedTicket.resolved
-                ? "text-green-400"
-                : "text-yellow-300"
-            }`}>
-              {selectedTicket.status.toUpperCase()}
-            </span>
-          </p>
-          <p className="mb-4">{selectedTicket.description}</p>
-          <ul className="text-sm space-y-1 text-gray-300">
-            <li><strong>Customer:</strong> {selectedTicket.customerName}</li>
-            <li><strong>Created By:</strong> {selectedTicket.createdBy}</li>
-            <li><strong>Created At:</strong> {selectedTicket.createdAt}</li>
-            {selectedTicket.resolvedAt && (
-              <li><strong>Resolved At:</strong> {selectedTicket.resolvedAt}</li>
-            )}
-          </ul>
+      {/* Floating Plus Button */}
+      <button
+        onClick={() => {
+          setShowForm(!showForm);
+          setSelectedTicket(null); // hide detail if form is open
+        }}
+        className={`fixed bottom-6 left-6 w-14 h-14 text-2xl flex items-center justify-center rounded-full ${
+          showForm ? "bg-red-500 hover:bg-red-600" : "bg-violet-500 hover:bg-violet-600"
+        } transition`}
+      >
+        {showForm ? "×" : "+"}
+      </button>
 
-          {!selectedTicket.resolved && (
+      {/* Ticket Creation Modal */}
+      {showForm && (
+        <div className="fixed inset-0 flex justify-center items-center bg-black/30 backdrop-blur-sm z-20">
+          <div className="bg-gray-800 rounded-xl p-6 border border-gray-700 w-full max-w-lg">
+            <h2 className="text-lg font-semibold mb-4">Create New Ticket</h2>
+            <div className="flex flex-col gap-3">
+              <input
+                type="text"
+                placeholder="Enter Issue Title"
+                className="p-2 rounded bg-gray-900 border border-gray-700 text-white shadow-sm hover:shadow-violet-400"
+                value={form.title}
+                onChange={(e) => setForm({ ...form, title: e.target.value })}
+              />
+              <textarea
+                placeholder="Describe the Issue"
+                className="p-2 rounded bg-gray-900 border border-gray-700 text-white shadow-sm hover:shadow-violet-400"
+                rows={3}
+                value={form.description}
+                onChange={(e) => setForm({ ...form, description: e.target.value })}
+              />
+              <input
+                type="text"
+                placeholder="Customer Name"
+                className="p-2 rounded bg-gray-900 border border-gray-700 text-white shadow-sm hover:shadow-violet-400"
+                value={form.customerName}
+                onChange={(e) => setForm({ ...form, customerName: e.target.value })}
+              />
+              <input
+                type="text"
+                placeholder="Created By (Agent Name)"
+                className="p-2 rounded bg-gray-900 border border-gray-700 text-white shadow-sm hover:shadow-violet-400"
+                value={form.createdBy}
+                onChange={(e) => setForm({ ...form, createdBy: e.target.value })}
+              />
+              <button
+                onClick={handleCreateTicket}
+                className="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded"
+              >
+                Create Ticket
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Ticket Details Modal */}
+      {selectedTicket && (
+        <div className="fixed inset-0 flex justify-center items-center bg-black/30 backdrop-blur-sm z-20">
+          <div className="bg-gray-800 rounded-xl p-6 border border-gray-700 w-full max-w-lg">
             <button
-              onClick={() => markAsResolved(selectedTicket.id)}
-              className="mt-6 w-full bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded"
+              className="text-gray-400 hover:text-white text-sm mb-4"
+              onClick={() => setSelectedTicket(null)}
             >
-              Mark as Resolved
+              Close ✖️
             </button>
-          )}
-          <button
-            onClick={() => closeTicket(selectedTicket.id)}
-            className="mt-3 w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded"
-          >
-            Close Ticket
-          </button>
+            <h2 className="text-2xl font-bold mb-2">{selectedTicket.title}</h2>
+            <p className="text-gray-400 mb-2">
+              Status:
+              <span className={`ml-2 ${selectedTicket.resolved ? "text-green-400" : "text-yellow-300"}`}>
+                {selectedTicket.status.toUpperCase()}
+              </span>
+            </p>
+            <p className="mb-4">{selectedTicket.description}</p>
+            <ul className="text-sm space-y-1 text-gray-300">
+              <li><strong>Customer:</strong> {selectedTicket.customerName}</li>
+              <li><strong>Created By:</strong> {selectedTicket.createdBy}</li>
+              <li><strong>Created At:</strong> {selectedTicket.createdAt}</li>
+              {selectedTicket.resolvedAt && <li><strong>Resolved At:</strong> {selectedTicket.resolvedAt}</li>}
+            </ul>
+
+            {!selectedTicket.resolved && (
+              <button
+                onClick={() => markAsResolved(selectedTicket.id)}
+                className="mt-6 w-full bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded"
+              >
+                Mark as Resolved
+              </button>
+            )}
+            <button
+              onClick={() => closeTicket(selectedTicket.id)}
+              className="mt-3 w-full bg-red-600 hover:bg-red-700 text-white py-2 px-4 rounded"
+            >
+              Close Ticket
+            </button>
+          </div>
         </div>
       )}
     </div>

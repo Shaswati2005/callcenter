@@ -2,6 +2,7 @@ import { useState } from "react";
 import { FiHome, FiActivity, FiAlertCircle, FiList, FiMenu, FiX } from "react-icons/fi";
 import Link from "next/link";
 import { UserButton, SignOutButton } from "@clerk/nextjs";
+import { FileTextIcon } from "lucide-react";
 
 
 
@@ -65,6 +66,12 @@ const Sidebar: React.FC<SidebarProps> = ({ user }) => {
             className="flex items-center gap-2 text-[#a29bfe] hover:text-white"
           >
             <FiList /> <span>Call Logs</span>
+          </Link>
+          <Link
+            href="/tickets"
+            className="flex items-center gap-2 text-[#a29bfe] hover:text-white"
+          >
+            <FileTextIcon /> <span>Tickets</span>
           </Link>
         </nav>
 
